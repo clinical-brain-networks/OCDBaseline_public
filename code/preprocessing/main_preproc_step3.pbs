@@ -1,0 +1,37 @@
+#!/bin/bash
+##########################################################################
+#
+#  Script:    preproc_master.pbs
+#  Author:    Luke Hearne
+#  Created:   2021-03-10
+#
+##########################################################################
+
+#PBS -N ljh_fmri_prepro_s3
+#PBS -l mem=36gb,walltime=1:00:00,ncpus=10
+#PBS -m abe
+#PBS -M luke.hearne@qimrberghofer.edu.au
+#PBS -o batch/
+#PBS -e batch/
+#PBS -k eod
+#PBS -J 21-97
+
+# exit when any command fails
+set -e
+
+# add paths to code and subject list
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/"
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/preprocessing/"
+
+# load specific subject from subject list
+mapfile -t subj_array < /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/subject_list.txt
+subj=${subj_array[$PBS_ARRAY_INDEX]}
+echo "Current subject: " ${subj}
+
+cd /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/preprocessing/
+
+module load miniconda3/current
+source activate /mnt/lustre/working/lab_lucac/lukeH/ljh-neuro/
+
+# run the post FIX script
+python post_fmriprep_denoising.py ${subj}

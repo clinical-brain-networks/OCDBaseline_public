@@ -1,0 +1,53 @@
+item _desc,item_num,factor_taboo,factor_contamination_cleaning,factor_doubts,factor_rituals_superstition,factor_hoarding_symmetry
+"Forbidden/perverse thoughts, images, impulses",20,0.88,0.10,0.02,0.10,0.00
+Content involves children on incest,21,0.84,0.15,0.03,0.04,-0.09
+Sexual behavior towards others,23,0.82,0.14,0.07,0.22,0.12
+Obsessions involving homosexuality,22,0.81,0.17,0.00,0.21,-0.10
+Violent or horrific images,3,0.70,0.09,0.17,0.17,0.11
+Fear will act on unwanted impulses,6,0.70,0.00,0.38,0.05,0.14
+Fear of blurting obscenities/insults,4,0.66,0.08,0.31,0.00,0.21
+Fear will steal things,7,0.62,0.27,0.27,0.09,0.38
+Fear of doing something embarrassing,5,0.60,0.12,0.25,0.08,0.38
+Fear might harm self,1,0.58,0.09,0.20,0.26,0.10
+Concern with sacrilege/blasphemy,26,0.56,0.20,0.17,0.26,0.01
+Intrusive (nonviolent) images,35,0.52,0.14,0.01,0.41,0.12
+"Concern with right/wrong, morality",27,0.48,0.14,0.30,0.28,0.10
+Concern with dirt or germs,12,0.10,0.92,0.13,0.03,0.06
+Excessive/ritualized hand washing,43,-0.04,0.88,0.15,0.16,0.01
+Other measures to prevent/remove contaminants,46,0.12,0.81,0.10,0.19,0.03
+Concerns with bodily secretions,11,0.27,0.78,0.16,0.08,0.01
+Cleaning household items/objects,45,-0.04,0.74,0.06,0.15,0.26
+"Excessive showering, grooming",44,-0.03,0.73,0.02,0.25,0.24
+Excessive concern with animals,15,0.23,0.73,0.10,0.10,0.17
+Bothered by sticky substances,16,0.13,0.72,0.02,0.19,0.19
+Concern with household cleaners,14,0.20,0.70,0.21,0.14,0.17
+Concern with environmental contaminants,13,0.26,0.66,0.24,0.12,0.00
+Concerned will get ill because of contaminant,17,0.26,0.62,0.33,0.12,-0.02
+Concern about contaminants,19,0.02,0.57,-0.20,-0.07,0.17
+Checking that did not harm others,49,0.32,0.10,0.81,0.12,-0.02
+Fear will be responsible for something terrible happening,9,0.19,0.10,0.76,0.15,0.08
+Fear might harm others,2,0.37,0.20,0.73,0.05,0.09
+Checking that nothing terrible did/will happen,51,0.25,0.13,0.72,0.27,0.06
+"Checking locks, stoves, appliances",48,-0.19,0.09,0.63,0.08,0.30
+Checking that did not make mistake,52,0.06,0.16,0.60,0.15,0.44
+Fear might harm others because not careful enough,8,0.59,-0.02,0.59,0.00,0.03
+Checking did not harm self,50,0.37,0.27,0.53,0.25,0.15
+Concerned will make others ill,18,0.29,0.49,0.51,0.10,-0.06
+Superstitious behaviors,66,0.20,0.20,0.14,0.76,0.08
+Lucky/unlucky numbers,38,0.18,0.11,0.07,0.73,0.16
+Superstitious fears,40,0.21,0.17,0.17,0.73,-0.02
+Need to repeat routine activities,56,0.00,0.05,0.11,0.69,0.28
+Colors with special significance,39,0.19,0.23,0.11,0.60,0.11
+Counting compulsions,58,0.05,0.08,0.11,0.52,0.42
+Ritualized eating behaviors,65,0.21,0.23,-0.02,0.48,0.33
+Mental rituals,61,0.34,0.05,0.13,0.45,0.20
+Measures (not checking) to prevent harm or terrible consequences,64,0.32,0.13,0.39,0.43,-0.04
+Ordering/arranging compulsions,59,0.00,0.18,-0.03,0.27,0.71
+Hoarding obsesions,25,0.25,0.17,0.04,0.12,0.63
+Symmetry obsessions,29,-0.03,0.18,-0.07,0.22,0.62
+Hoarding compulsions,60,0.20,0.14,0.06,0.16,0.62
+Excessive listmaking,,-0.09,-0.06,0.11,-0.12,0.59
+Fear of losing things,34,0.18,0.12,0.37,0.17,0.58
+"Re-reading, re-writing",55,0.08,0.13,0.19,0.45,0.49
+"Need to know, remember",31,0.34,0.10,0.15,0.30,0.46
+Fear of not saying the right thing,33,0.27,0.18,0.26,0.23,0.42

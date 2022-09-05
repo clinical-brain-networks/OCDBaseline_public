@@ -1,0 +1,38 @@
+#!/bin/bash
+##########################################################################
+#
+#  Script:    extract_betas.pbs
+#  Author:    Luke Hearne
+#  Created:   2021-08-20
+#
+##########################################################################
+
+#PBS -N extract_beta
+#PBS -l mem=20gb,walltime=1:00:00,ncpus=8
+#PBS -m abe
+#PBS -M luke.hearne@qimrberghofer.edu.au
+#PBS -o batch/
+#PBS -e batch/
+#PBS -k eod
+#PBS -J 0-98
+
+# exit when any command fails
+set -e
+
+# add paths to code and subject list
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/"
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/glms/"
+
+# load specific subject from subject list
+mapfile -t subj_array < /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/subject_list.txt
+subj=${subj_array[$PBS_ARRAY_INDEX]}
+echo "Current subject: " ${subj}
+
+cd /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/glms/
+
+# load modules
+module load miniconda3/current
+source activate /mnt/lustre/working/lab_lucac/lukeH/ljh-neuro/
+
+# run the extract timeseries script
+python glm_beta_extraction.py ${subj}

@@ -1,0 +1,12 @@
+ROI,label,contrast,nii,eroded_nii
+Insula (L),leftInsula,Threat reversal,Savage_threat_leftInsula.nii.gz,
+Insula (R),rightInsula,Threat reversal,Savage_threat_rightInsula.nii.gz,
+dACC,acc,Threat reversal,Savage_threat_acc.nii.gz,
+vmPFC,vmpfc,Safety reversal,Savage_safety_vmpfc.nii.gz,
+PCC,pcc,Safety reversal,Savage_safety_pcc.nii.gz,
+Putamen (L),leftPUT,Threat reversal,tian_threat_leftPUT.nii.gz,
+Putamen (R),rightPUT,Threat reversal,tian_threat_rightPUT.nii.gz,
+Caudate (L),leftCAU,Threat reversal,tian_threat_leftCAU.nii.gz,
+Caudate (R),rightCAU,Threat reversal,tian_threat_rightCAU.nii.gz,
+GP (L),leftGP,Threat reversal,tian_threat_leftGP.nii.gz,
+GP (R),rightGP,Threat reversal,tian_threat_rightGP.nii.gz,

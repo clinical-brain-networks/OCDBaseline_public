@@ -1,0 +1,89 @@
+#!/bin/bash
+##########################################################################
+#
+#  Script:    preproc_master.pbs
+#  Author:    Luke Hearne
+#  Created:   2021-03-10
+#
+##########################################################################
+
+#PBS -N ljh_fmri_prepro_s1
+#PBS -l mem=50gb,walltime=40:00:00,ncpus=10
+#PBS -m abe
+#PBS -M luke.hearne@qimrberghofer.edu.au
+#PBS -o batch/
+#PBS -e batch/
+#PBS -k eod
+#PBS -J 0-3
+
+# exit when any command fails
+set -e
+
+### WHAT TO RUN ###
+fmriprep_preFIX=1  # 16 hours
+mriqc=1            # 4 hours
+bids_to_FIX=1      # 10 hours
+apply_FIX=1        # 4 hours
+
+# add paths to code and subject list
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/"
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/preprocessing/"
+
+# path for error checking
+deriv_dir=/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/data/derivatives/
+
+# load specific subject from subject list
+mapfile -t subj_array < /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/preprocessing/preproc_list.txt
+subj=${subj_array[$PBS_ARRAY_INDEX]}
+echo "Current subject: " ${subj}
+
+cd /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/preprocessing/
+
+# if statements for each pipeline aspect
+# fmriprep pre FIX
+if [ ${fmriprep_preFIX} -eq 1 ]; then
+    ./fmriprep_preFIX.sh ${subj}
+fi
+
+# check the output html exists
+# fmriprep is the first step so this can always be run
+FILE=${deriv_dir}fmriprep/${subj}.html
+if [ -f $FILE ];then
+    echo "fmriprep check passed"
+else
+    echo "$FILE doesn't exist: fmriprep check failed"
+    exit 1
+fi
+
+# mriqc
+if [ ${mriqc} -eq 1 ]; then
+    ./run_mriqc.sh ${subj}
+fi
+
+# convert bids to fix and melodic
+if [ ${bids_to_FIX} -eq 1 ]; then
+    ./bids_to_FIX.sh ${subj}
+fi
+
+# apply the trained FIX classifier to the data
+if [ ${apply_FIX} -eq 1 ]; then
+    ./apply_fix_hpc.sh ${subj}
+    ./copy_fix_to_bids_hpc.sh ${subj}
+
+    # check the output clean niftis are there
+    FILE=${deriv_dir}fix/fearRev/${subj}/feat_${subj}.feat/filtered_func_data_clean.nii.gz
+    if [ -f $FILE ];then
+        echo "FIX check passed"
+    else
+        echo "$FILE doesn't exist: FIX check failed"
+        exit 1
+    fi
+
+    FILE=${deriv_dir}fix/rest/${subj}/feat_${subj}.feat/filtered_func_data_clean.nii.gz
+    if [ -f $FILE ];then
+        echo "FIX check passed"
+    else
+        echo "$FILE doesn't exist: FIX check failed"
+        exit 1
+    fi
+fi

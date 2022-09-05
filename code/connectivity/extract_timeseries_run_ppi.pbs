@@ -1,0 +1,42 @@
+#!/bin/bash
+##########################################################################
+#
+#  Script:    extract_timeseries_run_ppi.pbs
+#  Author:    Luke Hearne
+#  Created:   2021-07-22
+#  This code runs timeseries extraction on the hpc
+##########################################################################
+
+#PBS -N extract_ts_ppi
+#PBS -l mem=20gb,walltime=2:00:00,ncpus=8
+#PBS -m abe
+#PBS -M luke.hearne@qimrberghofer.edu.au
+#PBS -o batch/
+#PBS -e batch/
+#PBS -k eod
+#PBS -J 0-5
+
+# exit when any command fails
+set -e
+
+# add paths to code and subject list
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/"
+export PATH="$PATH:/mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/connectivity/"
+
+# load specific subject from subject list
+mapfile -t subj_array < /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/subject_list.txt
+subj=${subj_array[$PBS_ARRAY_INDEX]}
+echo "Current subject: " ${subj}
+
+cd /mnt/lustre/working/lab_lucac/lukeH/projects/OCDbaseline/docs/code/connectivity/
+
+# load modules
+module load miniconda3/current
+source activate /mnt/lustre/working/lab_lucac/lukeH/ljh-neuro/
+module load AFNI/18.2.15 
+
+# run the extract timeseries script
+python extract_timeseries.py ${subj}
+
+# run the ppi
+python generate_task_fc.py ${subj}
